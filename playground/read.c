@@ -4,6 +4,7 @@
 
 int main() {
     char* fileName = "hello.txt";
+    printf("%s",fileName);
     int fd = open(fileName, O_RDWR);
     if(fd == -1) {
         printf("\nError opening file!!\n");
