@@ -1,10 +1,11 @@
 #include <unistd.h>
 #include <fcntl.h>
-#include <stdio.h>
+#include "myHeader.h"
 
 int main() {
     char* fileName = "hello.txt";
-    printf("%s",fileName);
+    printf("%s\n",fileName);
+    printf("PI = %f\n",PI);
     int fd = open(fileName, O_RDWR);
     if(fd == -1) {
         printf("\nError opening file!!\n");
