@@ -17,8 +17,9 @@ void enableRawMode() {
     raw.c_iflag &= ~(BRKINT | ICRNL | IXON | ISTRIP | IXON);
     raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
     raw.c_oflag &= ~(OPOST);
-    raw.c_cc[VMIN] = 0;
     raw.c_cflag |= (CS8);
+    raw.c_cc[VMIN] = 0;
+    raw.c_cc[VTIME] = 1;
 
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
@@ -26,16 +27,16 @@ void enableRawMode() {
 int main() {
     std::cout << "Hello, World!" << std::endl;
     // printf("Hello, World!\n");
-    char c;
     enableRawMode();
-    std::cout << STDIN_FILENO << "\n";
-    while (std::cin.get(c) && c != 'q') {
-        // std::cout << c;
+    while(1) {
+        char c { '\0' };
+        std::cin.get(c);
         if(iscntrl(c)) {
             std::cout << static_cast<int>(c) << "\r\n";
         } else {
             std::cout << static_cast<int>(c) << " (" << c << ")" << "\r\n";
         }
+        if(c == 'q') break;
     }
     return 0;
 }
