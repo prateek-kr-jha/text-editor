@@ -2,6 +2,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <cctype>
 
 struct termios orig_termios;
 
@@ -26,6 +27,11 @@ int main() {
     std::cout << STDIN_FILENO << "\n";
     while (std::cin.get(c) && c != 'q') {
         // std::cout << c;
+        if(iscntrl(c)) {
+            std::cout << static_cast<int>(c) << "\n";
+        } else {
+            std::cout << static_cast<int>(c) << " (" << c << ")" << "\n";
+        }
     }
     return 0;
 }
