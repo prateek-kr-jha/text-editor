@@ -1,3 +1,4 @@
+/** includes **/
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>
@@ -7,8 +8,12 @@
 #include <cerrno>
 #include <cstring>
 
+
+/*** data ***/
 struct termios orig_termios;
 
+
+/** terminal */
 void die(std::string s) {
     std::cerr << s << "\r\n" << std::strerror(errno) << std::endl;
     exit(1);
@@ -33,6 +38,7 @@ void enableRawMode() {
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
 }
 
+/** init */
 int main() {
     std::cout << "Hello, World!" << std::endl;
     // printf("Hello, World!\n");
