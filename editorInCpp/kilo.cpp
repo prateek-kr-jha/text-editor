@@ -8,6 +8,9 @@
 #include <cerrno>
 #include <cstring>
 
+/** defines */
+#define CTRL_KEY(K) ((K) & 0x1f)
+
 
 /*** data ***/
 struct termios orig_termios;
@@ -53,7 +56,7 @@ int main() {
         } else {
             std::cout << static_cast<int>(c) << " (" << c << ")" << "\r\n";
         }
-        if(c == 'q') break;
+        if(c == CTRL_KEY('q')) break;
     }
     return 0;
 }
