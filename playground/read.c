@@ -21,6 +21,5 @@ int main() {
     printf("%d bytes read!\n", bytesRead);
     printf("File contents: %s\n", buffer);
 
-
     return 0;
 }
